@@ -4,10 +4,13 @@ const request = require("request");
 const https = require("https");
 const { options } = require("request");
 
+require("dotenv").config();
+const port = process.env.PORT || 3000;
+
 const app = express();
 app.use(express.static("public"));
 app.use(bodyParser.urlencoded({ extended: true }));
-const port = 3000;
+
 
 app.get("/", (req, res) => {
   res.sendFile(__dirname + "/signup.html");
@@ -37,7 +40,7 @@ app.post("/", function (req, res) {
 
   const options = {
     method: "POST",
-    auth: "heyru:54f9384976596cd65dce2191794af0e6-us19",
+    auth: "heyru:1156922d86a705832b38e80fc950d386-us19",
   };
   const request = https.request(url, options, function (response) {
     if (response.statusCode === 200) {
@@ -46,7 +49,7 @@ app.post("/", function (req, res) {
       res.sendFile(__dirname + "/failure.html");
     }
     response.on("data", function (data) {
-      // console.log(JSON.parse(data));
+      console.log(JSON.parse(data));
     });
   });
 
@@ -62,7 +65,7 @@ app.listen(port, () => {
 });
 
 // API Key
-// 54f9384976596cd65dce2191794af0e6-us19
+// 1156922d86a705832b38e80fc950d386-us19
 
 // List ID
 // cf6bf09b97
